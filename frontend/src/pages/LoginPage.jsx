@@ -28,7 +28,7 @@ const LoginPage = () => {
       const data = await response.json();
       console.log(data);
 
-      login(data.email, data.token);
+      login(data.user.email, data.token);
       navigate('/home');
     } catch (e) {
       console.log(e);

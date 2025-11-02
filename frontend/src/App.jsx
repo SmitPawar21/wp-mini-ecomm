@@ -1,10 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import CartPage from "./pages/CartPage";
 import MyOrdersPage from "./pages/MyOrdersPage";
 import IntroPage from "./pages/IntroPage";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+import { useEffect } from "react";
 
 // Color palette - #040D12 #183D3D #5C8374 #93B1A6 #ffffff #A27B5C
 
