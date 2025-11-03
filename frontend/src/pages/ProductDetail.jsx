@@ -52,9 +52,26 @@ const ProductDetail = ({ productId, onBack }) => {
     }
   };
 
-  const handleAddToCart = () => {
-    console.log('Adding to cart:', { product, quantity, selectedVariants });
-    // Implement your cart logic here
+  const handleAddToCart = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/add`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`
+        },
+        body: JSON.stringify({productId, quantity})
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      setLoading(false);
+    } catch (err) {
+      alert(err);
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -104,7 +121,7 @@ const ProductDetail = ({ productId, onBack }) => {
                 src={product.images[selectedImage]} 
                 alt={product.name}
                 className="w-full h-96 object-cover"
-                onError={(e) => { e.target.src = 'https://via.placeholder.com/400x400?text=Product+Image'; }}
+                onError={(e) => { e.target.src = ''; }}
               />
             </div>
             
@@ -124,7 +141,7 @@ const ProductDetail = ({ productId, onBack }) => {
                     src={img} 
                     alt={`${product.name} ${index + 1}`}
                     className="w-full h-full object-cover"
-                    onError={(e) => { e.target.src = 'https://via.placeholder.com/80x80?text=Img'; }}
+                    onError={(e) => { e.target.src = ''; }}
                   />
                 </div>
               ))}

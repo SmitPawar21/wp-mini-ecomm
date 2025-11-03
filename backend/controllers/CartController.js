@@ -3,7 +3,8 @@ import Product from '../models/Product.js';
 
 export const getCart = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
+    console.log("cart me user id:", userId);
 
     let cart = await Cart.findOne({ userId }).populate('items.productId');
 
@@ -47,7 +48,7 @@ export const getCart = async (req, res) => {
 
 export const addItem = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
     const { productId, quantity = 1 } = req.body;
 
     if (!productId) {
@@ -125,7 +126,7 @@ export const addItem = async (req, res) => {
 
 export const updateItem = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
     const { productId, quantity } = req.body;
 
     if (!productId || quantity === undefined) {
@@ -203,7 +204,7 @@ export const updateItem = async (req, res) => {
 
 export const removeOneItem = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
     const { productId } = req.params;
 
     const cart = await Cart.findOne({ userId });
@@ -248,7 +249,7 @@ export const removeOneItem = async (req, res) => {
 
 export const clearCart = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user.userId;
 
     const cart = await Cart.findOne({ userId });
 
