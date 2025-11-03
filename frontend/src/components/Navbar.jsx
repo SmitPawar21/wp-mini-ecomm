@@ -20,8 +20,8 @@ const Navbar = () => {
     };
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Order', path: '/order' },
+        { name: 'Home', path: '/home' },
+        { name: 'My Orders', path: '/my-orders' },
         { name: 'About', path: '/about' },
         { name: 'Contact', path: '/contact' },
     ];
@@ -102,6 +102,7 @@ const Navbar = () => {
                             onMouseEnter={(e) => e.currentTarget.style.color = colors.primary}
                             onMouseLeave={(e) => e.currentTarget.style.color = colors.textLight}
                             aria-label="Shopping Cart"
+                            onClick={() => navigate("/cart")}
                         >
                             <ShoppingCart className="w-6 h-6" />
                         </button>
