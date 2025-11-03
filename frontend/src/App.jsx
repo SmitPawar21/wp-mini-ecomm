@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, useParams } from "react-router-dom";
 import HomePage from "./pages/HomePage"
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -8,6 +8,7 @@ import IntroPage from "./pages/IntroPage";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { useEffect } from "react";
+import ProductDetail from "./pages/ProductDetail";
 
 // Color palette - #040D12 #183D3D #5C8374 #93B1A6 #ffffff #A27B5C
 
@@ -24,6 +25,13 @@ const ProtectedRoute = ({ children }) => {
 
   return children;
 };
+
+function ProductDetailWrapper() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  
+  return <ProductDetail productId={id} onBack={() => navigate(-1)} />;
+}
 
 function App() {
 
@@ -45,6 +53,10 @@ function App() {
         <Route
           path="/my-orders"
           element={<ProtectedRoute> <MyOrdersPage /> </ProtectedRoute>}
+        />
+        <Route
+          path="/product/:id"
+          element={<ProtectedRoute> <ProductDetailWrapper /> </ProtectedRoute>}
         />
       </Routes>
     </Router>

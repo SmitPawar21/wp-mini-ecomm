@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const mockProducts = [
   { id: 1, name: 'Premium Headphones', price: 299, category: 'Electronics', img: 'https://placehold.co/300x300/183D3D/93B1A6?text=Headphones' },
@@ -10,6 +11,7 @@ const mockProducts = [
 ];
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState(mockProducts);
   const [isLoading, setIsLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(1);
@@ -25,7 +27,7 @@ const HomePage = () => {
     sortBy: 'createdAt',
     order: 'desc',
     page: 1,
-    limit: 10,
+    limit: 12,
   });
 
   const colors = {
@@ -335,6 +337,7 @@ const HomePage = () => {
                 key={product.id}
                 className="rounded-lg overflow-hidden transition-transform transform hover:-translate-y-1"
                 style={{ backgroundColor: colors.cardBg, border: `1px solid ${colors.border}4D` }}
+                onClick={() => navigate(`/product/${product._id}`)}
               >
                 <img src={product.img} alt={product.name} className="w-full h-48 object-cover" />
                 <div className="p-4">
