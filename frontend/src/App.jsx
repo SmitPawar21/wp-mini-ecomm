@@ -10,7 +10,7 @@ import { AuthContext } from "./context/AuthContext";
 import { useEffect } from "react";
 import ProductDetail from "./pages/ProductDetail";
 
-// Color palette - #040D12 #183D3D #5C8374 #93B1A6 #ffffff #A27B5C
+// Color palette: #040D12 #183D3D #5C8374 #93B1A6 #ffffff #A27B5C
 
 const ProtectedRoute = ({ children }) => {
   const { user, token, loading } = useContext(AuthContext);
